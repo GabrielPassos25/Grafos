@@ -25,7 +25,7 @@ def criar_grafo():
         while v==1:
             conector=input("Digite o nome do {} vértice:".format(x))
             caminhos2.append(conector)
-            local_conector = input("Vértices disponíveis: {}.\nDeseja adicionar o vértice {} em qual vértice(s) já existente(s)?".format(sorted(set(caminhos_sem_rep)),conector))
+            local_conector = input("Vértices disponíveis: {}.\nDeseja adicionar o vértice {} em qual vértice já existente?".format(sorted(set(caminhos_sem_rep)),conector))
             caminhos1.append(local_conector)
             while local_conector not in caminhos_sem_rep:
                 local_conector = input("Vértices disponíveis: {}.\nDeseja adicionar o vértice {} em qual vértice já existente?".format(caminhos_sem_rep,conector))
@@ -43,6 +43,49 @@ print("=-"*50)
 for i in range(0,len(caminhos1)):
     print("Distância entre",caminhos1[i],"e",caminhos2[i],":",distancias[i])
 print("=-"*50)
+
+print()
+print(caminhos1)
+print(caminhos2)
+print(distancias)
+
+menorDistancia = -1
+menoresCaminhos = []
+caminhosVerificados = []
+
+def acharOMenorCaminho(start, end, tamanho, caminho):
+    global menorDistancia
+    global menoresCaminhos
+    if start==end:
+        caminhosVerificados.append(caminho)
+        if tamanho < menorDistancia or menorDistancia==-1:
+            menorDistancia = tamanho
+            menoresCaminhos = [caminho]
+        elif tamanho==menorDistancia:
+            menoresCaminhos.append(caminho)
+        return
+    for i in range(0, len(caminhos1)):
+        if caminhos1[i]==start:
+            LocalCaminho = caminho + caminhos2[i]
+            LocalTamanho = tamanho + distancias[i]
+            acharOMenorCaminho(caminhos2[i], end, LocalTamanho, LocalCaminho)
+
+
+start = input("Digite de onde você quer partir: ")
+end = input("Digite até onde você quer chegar: ")
+print()
+
+acharOMenorCaminho(start, end, 0, start)
+
+print(caminhosVerificados)
+
+print("-"*30)
+print("A menor distância percorrida é:", menorDistancia)
+print("O(s) melhor(es) caminho(s) é(são) esse(s):")
+for menorCaminho in menoresCaminhos:
+    print(" "*10+menorCaminho)
+print("-"*30)
+
 
 
     
