@@ -1,3 +1,4 @@
+#ACRESCENTAR REGISTROS
 caminhos1=[]
 caminhos2=[]
 distancias=[]
@@ -79,15 +80,9 @@ acharOMenorCaminho(start, end, 0, start)
 
 print(caminhosVerificados)
 
-print("-"*30)
+print("-="*30)
 print("A menor distância percorrida é:", menorDistancia)
 print("O(s) melhor(es) caminho(s) é(são) esse(s):")
 for menorCaminho in menoresCaminhos:
     print(" "*10+menorCaminho)
-print("-"*30)
-
-
-
-    
-
-
+print("-="*30)
